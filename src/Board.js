@@ -1,3 +1,5 @@
+// Board.js file
+
 import React, { useState } from "react";
 import Cell from "./Cell";
 import "./Board.css";
@@ -34,11 +36,33 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   function createBoard() {
     let initialBoard = [];
     // TODO: create array-of-arrays of true/false values
+
+    for (let i=0; i< nrows; i++) {
+      const row = []; 
+
+      for (let j=0;j<ncols; j++){
+        const cell= chanceLightStartsOn ? "t" : "f";
+        row.push(cell)
+      }
+
+      initialBoard.push(row);
+    };
+
+    console.log(initialBoard); 
     return initialBoard;
   }
 
   function hasWon() {
     // TODO: check the board in state to determine whether the player has won.
+
+    const allAreF = board.every(row => 
+      row.every(cell => cell === "f"));
+
+    if (allAreF) {
+      return "You Win!"
+    } 
+    return null;
+
   }
 
   function flipCellsAround(coord) {
@@ -53,7 +77,14 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
         }
       };
 
-      // TODO: Make a (deep) copy of the oldBoard
+        // TODO: Make a (deep) copy of the oldBoard
+
+    const createCopyBoard = () => {
+
+      return flipCell(y, x, oldBoard);
+    
+
+    }
 
       // TODO: in the copy, flip this cell and the cells around it
 
@@ -62,11 +93,12 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   }
 
   // if the game is won, just show a winning msg & render nothing else
+  hasWon()
 
   // TODO
 
   // make table board
-
+  board(3,3,chanceLightStartsOn)
   // TODO
 }
 
